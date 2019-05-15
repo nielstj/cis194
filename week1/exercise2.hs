@@ -1,3 +1,5 @@
+-- Reverse engineering manual way to find patterns
+
 type Peg = String
 type Move = (Peg, Peg)
 

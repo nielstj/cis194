@@ -2,6 +2,7 @@ toDigits :: Integer -> [Integer]
 toDigits n
     | n <= 0    = []
     | otherwise = map (\a -> read [a] :: Integer) (show n)
+    -- alternative way
     -- | otherwise = toDigits (div n 10) ++ [mod n 10]
 
 toDigitsRev :: Integer -> [Integer]
