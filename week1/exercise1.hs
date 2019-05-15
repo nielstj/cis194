@@ -6,23 +6,19 @@ toDigits n
     -- | otherwise = toDigits (div n 10) ++ [mod n 10]
 
 toDigitsRev :: Integer -> [Integer]
-toDigitsRev n = reverse (toDigits n)
-
-enumerate :: [Integer] -> [(Integer, Integer)]
-enumerate [] = []
-enumerate xs = zip [0..] xs
+toDigitsRev = reverse . toDigits
 
 doubleEveryOther :: [Integer] -> [Integer]
 doubleEveryOther x =
   let xs = enumerate x
   in [res | (index, value) <- xs , let res = value * (mod index 2 + 1)]
-
+  where 
+    enumerate :: [Integer] -> [(Integer, Integer)]
+    enumerate [] = []
+    enumerate xs = zip [0..] xs
 
 sumDigits :: [Integer] -> Integer
-sumDigits [] = 0
-sumDigits (x:xs) =  sumDigits xs + (sum . toDigits) x
+sumDigits = sum . concatMap (\x -> toDigits x)
 
 validate :: Integer -> Bool
-validate x = 
-  let sum = (sumDigits . doubleEveryOther . toDigitsRev) x
-  in (mod sum 10) == 0
+validate = (0 ==) . (`mod` 10) . sum . doubleEveryOther . toDigitsRev
