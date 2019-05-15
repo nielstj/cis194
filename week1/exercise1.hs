@@ -19,9 +19,9 @@ doubleEveryOther x =
 
 sumDigits :: [Integer] -> Integer
 sumDigits [] = 0
-sumDigits (x:xs) =  sumDigits xs + sum (toDigits x)
+sumDigits (x:xs) =  sumDigits xs + (sum . toDigits) x
 
 validate :: Integer -> Bool
 validate x = 
-  let sum = sumDigits (doubleEveryOther (toDigitsRev x))
+  let sum = (sumDigits . doubleEveryOther . toDigitsRev) x
   in (mod sum 10) == 0
