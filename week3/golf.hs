@@ -7,7 +7,7 @@ import Data.Bool
   
 -- Exercise 1
 skips :: [a] -> [[a]]
-skips xs = [[ e | (i, e) <- zip [1..] xs, mod i n == 0] | n <- [1..length xs]]
+skips xs = [[ e | (i, e) <- zip (cycle [1..n]) xs, i == n] | n <- [1..length xs]]
 
 -- Exercise 2
 localMaxima :: [Integer] -> [Integer]
